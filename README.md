@@ -1,4 +1,3 @@
-# female-body-type-prediction
 # 👩‍🔬 Female Body Type Classification Model
 
 ## Project Overview
@@ -13,7 +12,7 @@ The core of this project involves two main stages:
 
 ## 🎯 Project Goal
 
-The primary goal is to create a robust classification system that assigns a `Body_type` label (e.g., Hourglass, Rectangle, Triangle) to an individual based on their bust, waist, and hip measurements, along with derived ratios.
+The primary goal is to create a robust classification system that assigns a `Body_type` label (e.g., Hourglass, Rectangle, Triangle) to an individual based on their bust, waist, and hip measurements, along with other derived ratios.
 
 ---
 
@@ -25,13 +24,11 @@ The dataset utilized for this project contains key anthropometric measurements o
 * `bust`: Bust circumference (in inches)
 * `waist`: Waist circumference (in inches)
 * `hips`: Hip circumference (in inches)
-* `high_hip`: High hip circumference (in inches - if available in the dataset)
-
+  
 **Engineered Features:**
 To better capture body proportions, the following ratios are calculated:
 * `WHR` (Waist-to-Hip Ratio): `waist / hips`
 * `BHR` (Bust-to-Hip Ratio): `bust / hips`
-* `HHR_WHR` (High Hip-to-Waist Ratio): `high_hip / waist` (only if `high_hip` data is present)
 
 **Target Variable (Output of Model):**
 * `Body_type`: Categorical labels assigned based on predefined rules, including: 'Hourglass', 'Bottom hourglass', 'Top hourglass', 'Spoon', 'Triangle', 'Inverted triangle', 'Rectangle', and 'Undetermined'.
@@ -45,7 +42,6 @@ The project follows a structured data science methodology:
 ### 1. Data Preparation & Feature Engineering
 * **Unit Consistency:** Ensures all raw measurements are uniformly in **inches**. If data is in centimeters, it is converted.
 * **Ratio Calculation:** Computes `WHR`, `BHR`, and `HHR_WHR` to represent key body proportions. A small `epsilon` is used to prevent division by zero errors.
-* **Missing Data Handling:** Specifically addresses the absence of the `high_hip` column. If missing, `HHR_WHR` is filled with `NaN`, affecting the classification of body types reliant on this measurement. Further general `NaN` imputation will be performed before ML training.
 
 ### 2. Rule-Based Body Type Classification
 * A custom Python script (`np.select`) applies a series of detailed logical conditions, based on anthropometric differences and ratios, to assign an initial `Body_type` to each individual.
